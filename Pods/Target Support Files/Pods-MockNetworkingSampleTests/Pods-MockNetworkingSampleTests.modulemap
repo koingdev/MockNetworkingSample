@@ -1,0 +1,6 @@
+framework module Pods_MockNetworkingSampleTests {
+  umbrella header "Pods-MockNetworkingSampleTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
