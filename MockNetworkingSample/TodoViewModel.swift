@@ -8,26 +8,35 @@
 
 import Foundation
 
+////////////////////////////////////////////////////////////////
+//
+// VIEWMODEL RESPONSIBILITIES:
+//		* Take care of App Logics
+//		* Use other dependencies (Ex: WebService, Database...) to perform some operation
+//		* Notify ViewController when something done via callback, delegate, binding...
+//
+////////////////////////////////////////////////////////////////
+
 final class TodoViewModel {
 	
-	let webService: WebServiceType
-	var todos: [Todo]!
+	let todoService: TodoServiceType
+	var todos: [Todo]?
 	
 	// Inject Dependencies here
-	init(webService: WebServiceType = WebService()) {
-		self.webService = webService
+	init(webService: TodoServiceType = TodoService()) {
+		self.todoService = webService
 	}
 	
 	func getAllTodos(completion: @escaping (Bool) -> Void) {
-		webService.getAllTodos { status, todos in
+		todoService.getAllTodos { status, todos in
+			self.todos = todos
+			
 			switch status {
 			case .success:
 				// does something here for success...
-				self.todos = todos
 				completion(true)
 			case .fail:
 				// does something here for fail...
-				self.todos = []
 				completion(false)
 			}
 		}

@@ -8,6 +8,14 @@
 
 import UIKit
 
+////////////////////////////////////////////////////////////////
+//
+// VIEW RESPONSIBILITIES:
+//		* Take care of all UI-related stuff
+//		* Use ViewModel to get something done
+//
+////////////////////////////////////////////////////////////////
+
 class ViewController: UIViewController {
 
 	let viewModel = TodoViewModel()
@@ -17,10 +25,9 @@ class ViewController: UIViewController {
 		
 		viewModel.getAllTodos { [weak self] success in
 			guard let s = self else { return }
-			s.viewModel.todos.forEach { print($0) }
+			s.viewModel.todos.map { $0.forEach { print($0) } }
 		}
 	}
-
 
 }
 

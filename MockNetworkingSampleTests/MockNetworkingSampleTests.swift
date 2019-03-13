@@ -11,26 +11,37 @@ import Nimble
 
 @testable import MockNetworkingSample
 
-final class MockWebService: WebServiceType {
+////////////////////////////////////////////////////////////////
+//
+// Why should we mock Networking Layer while writing a test ?
+//		* To simulate different scenarios
+//		* The test stop depending on the Network Condition
+//		* No more server communication
+//		* Flexibility to write a test in various situations
+//		that may not be so easy to reproduce if we write a test that talk to a real server
+//
+////////////////////////////////////////////////////////////////
+
+final class MockTodoService: TodoServiceType {
 	
 	// These are properties we use to fake the response
-	var responseStatus: ResponseStatus = .fail
+	var status: ResponseStatus!
 	var todos: [Todo]!
 	
-	func fakeResponse(status: ResponseStatus, todos: [Todo]) {
-		responseStatus = status
+	func fakeResponse(status: ResponseStatus, todos: [Todo]?) {
+		self.status = status
 		self.todos = todos
 	}
 	
-	func getAllTodos(completion: @escaping (ResponseStatus, [Todo]) -> Void) {
-		completion(responseStatus, todos)
+	func getAllTodos(completion: @escaping (ResponseStatus, [Todo]?) -> Void) {
+		completion(status, todos)
 	}
 	
 }
 
 class MockNetworkingSampleTests: XCTestCase {
 
-	let mockWebService = MockWebService()
+	let mockWebService = MockTodoService()
 	
 	override func setUp() {
 		// Put setup code here. This method is called before the invocation of each test method in the class.
@@ -58,13 +69,13 @@ class MockNetworkingSampleTests: XCTestCase {
 		
 		// Then
 		expect(result).toEventually(beTrue())
-		expect(viewModel.todos[0].title).toEventually(equal("K1"))
+		expect(viewModel.todos?[0].title).toEventually(equal("K1"))
 	}
 	
 	func testGetAllTodosFail() {
 		// Given
 		var result: Bool = false
-		let fakeTodos: [Todo] = []
+		let fakeTodos: [Todo]? = nil
 		mockWebService.fakeResponse(status: .fail, todos: fakeTodos)
 		
 		// When
@@ -75,7 +86,7 @@ class MockNetworkingSampleTests: XCTestCase {
 		
 		// Then
 		expect(result).toEventually(beFalse())
-		expect(viewModel.todos).toEventually(beEmpty())
+		expect(viewModel.todos).toEventually(beNil())
 	}
 	
 	func testGetAllTodosSuccessWithEmptyResult() {
