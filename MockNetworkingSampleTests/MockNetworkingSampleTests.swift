@@ -60,7 +60,6 @@ class MockNetworkingSampleTests: XCTestCase {
 		]
 		mockTodoNetworkService.fakeResponse(status: .success, todos: fakeTodos)
 		
-		
 		// When
 		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
 		viewModel.getAllTodos { success in
