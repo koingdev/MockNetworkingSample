@@ -22,87 +22,102 @@ import Nimble
 //
 ////////////////////////////////////////////////////////////////
 
-final class MockTodoNetworkService: TodoNetworkServiceType {
-	
-	// These are properties we use to fake the response
-	var status: ResponseStatus!
-	var todos: [Todo]!
-	
-	func fakeResponse(status: ResponseStatus, todos: [Todo]?) {
-		self.status = status
-		self.todos = todos
-	}
-	
-	func getAllTodos(completion: @escaping (ResponseStatus, [Todo]?) -> Void) {
-		completion(status, todos)
-	}
-	
-}
+class TodoViewModelTests: XCTestCase {
 
-class MockNetworkingSampleTests: XCTestCase {
+  // MARK: - Private Properties
 
-	let mockTodoNetworkService = MockTodoNetworkService()
+  private var sut: TodoViewModel!
+
+  private var mockTodoNetworkService: MockTodoNetworkService!
+  private var fakeTodos: [Todo] = []
+
+  // MARK: - Lifecycle
 	
 	override func setUp() {
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-	}
+    super.setUp()
+
+    mockTodoNetworkService = MockTodoNetworkService()
+    sut = TodoViewModel(todoNetworkService: mockTodoNetworkService)
+}
 
 	override func tearDown() {
-		// Put teardown code here. This method is called after the invocation of each test method in the class.
+    super.tearDown()
+
+    mockTodoNetworkService = nil
+    sut = nil
 	}
 
-	func testGetAllTodosSuccess() {
+  // MARK: - Tests
+
+	func test_getAllTodos_whenResponseIsSuccess_shouldReturnTodos() {
 		// Given
 		var result: Bool = false
-		let fakeTodos: [Todo] = [
+		fakeTodos = [
 			Todo(userId: 1, id: 1, title: "K1", completed: true),
 			Todo(userId: 1, id: 2, title: "K2", completed: true),
 		]
 		mockTodoNetworkService.fakeResponse(status: .success, todos: fakeTodos)
 		
 		// When
-		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
-		viewModel.getAllTodos { success in
+		sut.getAllTodos { success in
 			result = success
 		}
 		
 		// Then
 		expect(result).toEventually(beTrue())
-		expect(viewModel.todos?[0].title).toEventually(equal("K1"))
+		expect(self.sut.todos?.first?.title).toEventually(equal("K1"))
 	}
 	
-	func testGetAllTodosFail() {
+	func test_getAllTodos_whenResponseIsFail_shouldReturnNil() {
 		// Given
 		var result: Bool = false
-		let fakeTodos: [Todo]? = nil
-		mockTodoNetworkService.fakeResponse(status: .fail, todos: fakeTodos)
+		mockTodoNetworkService.fakeResponse(status: .fail, todos: nil)
 		
 		// When
-		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
-		viewModel.getAllTodos { success in
+		sut.getAllTodos { success in
 			result = success
 		}
 		
 		// Then
 		expect(result).toEventually(beFalse())
-		expect(viewModel.todos).toEventually(beNil())
+		expect(self.sut.todos).toEventually(beNil())
 	}
 	
 	func testGetAllTodosSuccessWithEmptyResult() {
 		// Given
 		var result: Bool = false
-		let fakeTodos: [Todo] = []
 		mockTodoNetworkService.fakeResponse(status: .success, todos: fakeTodos)
 		
 		// When
-		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
-		viewModel.getAllTodos { success in
+		sut.getAllTodos { success in
 			result = success
 		}
 		
 		// Then
 		expect(result).toEventually(beTrue())
-		expect(viewModel.todos).toEventually(beEmpty())
+		expect(self.sut.todos).toEventually(beEmpty())
 	}
 
+}
+
+// MARK: - Mocks
+
+extension TodoViewModelTests {
+
+  private class MockTodoNetworkService: TodoNetworkServiceType {
+
+    // These are properties we use to fake the response
+    private(set) var status: ResponseStatus!
+    private(set) var todos: [Todo]!
+
+    func fakeResponse(status: ResponseStatus, todos: [Todo]?) {
+      self.status = status
+      self.todos = todos
+    }
+
+    func getAllTodos(completion: @escaping (ResponseStatus, [Todo]?) -> Void) {
+      completion(status, todos)
+    }
+
+  }
 }
