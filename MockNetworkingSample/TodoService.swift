@@ -16,8 +16,8 @@ import Alamofire
 //		* Return response within completion block
 //
 // NOTE: Some people might come up with different naming-convention
-// 		 like XXXService, XXXManager, XXXModelAction
-//		 So just don't care about the naming
+// 		 like XXXService, XXXManager, XXXModelAction 😪
+//		 So just don't care about the naming 👻
 ////////////////////////////////////////////////////////////////
 
 enum ResponseStatus {
