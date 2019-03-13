@@ -25,12 +25,12 @@ enum ResponseStatus {
 	case fail
 }
 
-protocol TodoServiceType {
+protocol TodoNetworkServiceType {
 	func getAllTodos(completion: @escaping (ResponseStatus, [Todo]?) -> Void)
 	// More operation here...
 }
 
-final class TodoService: TodoServiceType {
+final class TodoNetworkService: TodoNetworkServiceType {
 	
 	func getAllTodos(completion: @escaping (ResponseStatus, [Todo]?) -> Void) {
 		Alamofire.request("https://jsonplaceholder.typicode.com/todos")

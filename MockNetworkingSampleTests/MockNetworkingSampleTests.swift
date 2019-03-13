@@ -22,7 +22,7 @@ import Nimble
 //
 ////////////////////////////////////////////////////////////////
 
-final class MockTodoService: TodoServiceType {
+final class MockTodoNetworkService: TodoNetworkServiceType {
 	
 	// These are properties we use to fake the response
 	var status: ResponseStatus!
@@ -41,7 +41,7 @@ final class MockTodoService: TodoServiceType {
 
 class MockNetworkingSampleTests: XCTestCase {
 
-	let mockWebService = MockTodoService()
+	let mockTodoNetworkService = MockTodoNetworkService()
 	
 	override func setUp() {
 		// Put setup code here. This method is called before the invocation of each test method in the class.
@@ -58,11 +58,11 @@ class MockNetworkingSampleTests: XCTestCase {
 			Todo(userId: 1, id: 1, title: "K1", completed: true),
 			Todo(userId: 1, id: 2, title: "K2", completed: true),
 		]
-		mockWebService.fakeResponse(status: .success, todos: fakeTodos)
+		mockTodoNetworkService.fakeResponse(status: .success, todos: fakeTodos)
 		
 		
 		// When
-		let viewModel = TodoViewModel(webService: mockWebService)
+		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
 		viewModel.getAllTodos { success in
 			result = success
 		}
@@ -76,10 +76,10 @@ class MockNetworkingSampleTests: XCTestCase {
 		// Given
 		var result: Bool = false
 		let fakeTodos: [Todo]? = nil
-		mockWebService.fakeResponse(status: .fail, todos: fakeTodos)
+		mockTodoNetworkService.fakeResponse(status: .fail, todos: fakeTodos)
 		
 		// When
-		let viewModel = TodoViewModel(webService: mockWebService)
+		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
 		viewModel.getAllTodos { success in
 			result = success
 		}
@@ -93,10 +93,10 @@ class MockNetworkingSampleTests: XCTestCase {
 		// Given
 		var result: Bool = false
 		let fakeTodos: [Todo] = []
-		mockWebService.fakeResponse(status: .success, todos: fakeTodos)
+		mockTodoNetworkService.fakeResponse(status: .success, todos: fakeTodos)
 		
 		// When
-		let viewModel = TodoViewModel(webService: mockWebService)
+		let viewModel = TodoViewModel(todoNetworkService: mockTodoNetworkService)
 		viewModel.getAllTodos { success in
 			result = success
 		}

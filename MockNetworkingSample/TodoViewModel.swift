@@ -12,23 +12,23 @@ import Foundation
 //
 // VIEWMODEL RESPONSIBILITIES:
 //		* Take care of App Logics
-//		* Use other dependencies (Ex: WebService, Database...) to perform some operation
+//		* Use other dependencies (Ex: NetworkService, Database...) to perform some operation
 //		* Notify ViewController when something done via callback, delegate, binding...
 //
 ////////////////////////////////////////////////////////////////
 
 final class TodoViewModel {
 	
-	let todoService: TodoServiceType
+	let todoNetworkService: TodoNetworkServiceType
 	var todos: [Todo]?
 	
 	// Inject Dependencies here
-	init(webService: TodoServiceType = TodoService()) {
-		self.todoService = webService
+	init(todoNetworkService: TodoNetworkServiceType = TodoNetworkService()) {
+		self.todoNetworkService = todoNetworkService
 	}
 	
 	func getAllTodos(completion: @escaping (Bool) -> Void) {
-		todoService.getAllTodos { status, todos in
+		todoNetworkService.getAllTodos { status, todos in
 			self.todos = todos
 			
 			switch status {

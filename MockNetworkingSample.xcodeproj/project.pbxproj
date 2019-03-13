@@ -14,7 +14,7 @@
 		A2BB899B2237FA680059C44B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2BB89992237FA680059C44B /* LaunchScreen.storyboard */; };
 		A2BB89A62237FA680059C44B /* MockNetworkingSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB89A52237FA680059C44B /* MockNetworkingSampleTests.swift */; };
 		A2BB89B12237FA980059C44B /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB89B02237FA980059C44B /* Todo.swift */; };
-		A2BB89B32237FD050059C44B /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB89B22237FD050059C44B /* TodoService.swift */; };
+		A2BB89B32237FD050059C44B /* TodoNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB89B22237FD050059C44B /* TodoNetworkService.swift */; };
 		A2BB89B5223804370059C44B /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BB89B4223804370059C44B /* TodoViewModel.swift */; };
 		CC09EBAD8078758DDEA46620 /* Pods_MockNetworkingSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F30224BCBC5251D39917E59 /* Pods_MockNetworkingSampleTests.framework */; };
 		D17E9535B73B9D86D39B14F4 /* Pods_MockNetworkingSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 514F69BAF9C0F8FD81036D69 /* Pods_MockNetworkingSample.framework */; };
@@ -45,7 +45,7 @@
 		A2BB89A52237FA680059C44B /* MockNetworkingSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkingSampleTests.swift; sourceTree = "<group>"; };
 		A2BB89A72237FA680059C44B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2BB89B02237FA980059C44B /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		A2BB89B22237FD050059C44B /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
+		A2BB89B22237FD050059C44B /* TodoNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNetworkService.swift; sourceTree = "<group>"; };
 		A2BB89B4223804370059C44B /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		B29F94B1A6E5405676961A98 /* Pods-MockNetworkingSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockNetworkingSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-MockNetworkingSample/Pods-MockNetworkingSample.release.xcconfig"; sourceTree = "<group>"; };
 		BB3EEDC8030B7FB3DA0BA930 /* Pods-MockNetworkingSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockNetworkingSampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MockNetworkingSampleTests/Pods-MockNetworkingSampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				A2BB89B02237FA980059C44B /* Todo.swift */,
-				A2BB89B22237FD050059C44B /* TodoService.swift */,
+				A2BB89B22237FD050059C44B /* TodoNetworkService.swift */,
 				A2BB89B4223804370059C44B /* TodoViewModel.swift */,
 				A2BB89922237FA670059C44B /* ViewController.swift */,
 				A2BB89902237FA670059C44B /* AppDelegate.swift */,
@@ -323,7 +323,7 @@
 			files = (
 				A2BB89932237FA670059C44B /* ViewController.swift in Sources */,
 				A2BB89B12237FA980059C44B /* Todo.swift in Sources */,
-				A2BB89B32237FD050059C44B /* TodoService.swift in Sources */,
+				A2BB89B32237FD050059C44B /* TodoNetworkService.swift in Sources */,
 				A2BB89B5223804370059C44B /* TodoViewModel.swift in Sources */,
 				A2BB89912237FA670059C44B /* AppDelegate.swift in Sources */,
 			);
