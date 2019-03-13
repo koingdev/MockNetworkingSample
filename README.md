@@ -1,5 +1,5 @@
 # MockNetworkingSample
-Unit Testing by mocking a network response + Nimble iOS Sample Project
+Unit Testing by mocking a network response + Nimble including with a quick MVVM Concept
 
 > Why should we mock Networking Layer while writing a test ?
 - To simulate different scenarios
