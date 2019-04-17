@@ -23,10 +23,10 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		viewModel.getAllTodos { [weak self] success in
-			guard let s = self else { return }
-			s.viewModel.todos.map { $0.forEach { print($0) } }
-		}
+//		viewModel.getAllTodos { [weak self] success in
+//			guard let s = self else { return }
+//			s.viewModel.todos.map { $0.forEach { print($0) } }
+//		}
 	}
 
 }
